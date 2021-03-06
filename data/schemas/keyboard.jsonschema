@@ -88,7 +88,7 @@
                 "oneOf": [
                     {
                         "type": "string",
-                        "enum": ["LAYOUT"]
+                        "enum": ["LAYOUT", "LAYOUT_planck_1x2uC"]
                     },
                     {
                         "type": "string",
@@ -297,6 +297,28 @@
                 "vid": {
                     "type": "string",
                     "pattern": "^[0-9A-F]x[0-9A-F][0-9A-F][0-9A-F][0-9A-F]"
+                }
+            }
+        },
+        "qmk_lufa_bootloader": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "esc_output": {
+                    "type": "string",
+                    "pattern": "^[A-K]\\d{1,2}$"
+                },
+                "esc_input": {
+                    "type": "string",
+                    "pattern": "^[A-K]\\d{1,2}$"
+                },
+                "led": {
+                    "type": "string",
+                    "pattern": "^[A-K]\\d{1,2}$"
+                },
+                "speaker": {
+                    "type": "string",
+                    "pattern": "^[A-K]\\d{1,2}$"
                 }
             }
         }
