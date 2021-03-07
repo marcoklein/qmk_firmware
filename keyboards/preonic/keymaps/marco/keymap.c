@@ -26,7 +26,9 @@ enum preonic_layers {
 };
 
 enum preonic_keycodes {
-  BACKLIT = SAFE_RANGE
+  BACKLIT = SAFE_RANGE,
+  GAME,
+  COLEMAK
 };
 
 #define LSPACE LT(_RAISE, KC_SPACE)
@@ -47,6 +49,9 @@ enum preonic_keycodes {
 #define MOD_I LALT_T(KC_I)
 #define MOD_O RGUI_T(KC_O)
 
+float colemak_sound[][2] = SONG(COLEMAK_SOUND);
+float game_sound[][2] = SONG(GUITAR_SOUND);
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Colemak
@@ -61,17 +66,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Esc  |GUI(A)|ALT(R)|CTL(S)|SFT(T)|   G  |   M  |SFT(N)|CTL(E)|ALT(I)|GUI(O)|  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   D  |   V  |   K  |   H  |   ,  |   .  |   /  |Enter |
+ * | Shift|   Z  |   X  |   C  |   D  |   V  |   K  |   H  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |LSPACE|MBSPC |MENTER|RSPACE| Left | Down |  Up  |Right |
+ * | GAME | Ctrl | Alt  | GUI  |LSPACE|MBSPC |MENTER|RSPACE| Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_preonic_grid(
   KC_GRV , KC_1  , KC_2   , KC_3   ,  KC_4  ,    KC_5 ,   KC_6 , KC_7   , KC_8    ,    KC_9 , KC_0    , KC_BSPC ,
   KC_TAB , KC_Q  , KC_W   , KC_F   ,  KC_P  ,    KC_B ,   KC_J , KC_L   , KC_U    ,    KC_Y , KC_SCLN , KC_DEL  ,
   KC_ESC , MOD_A , MOD_R  , MOD_S  ,  MOD_T ,    KC_G ,   KC_M , MOD_N  , MOD_E   , MOD_I   , MOD_O   , KC_QUOT ,
-  KC_LSFT, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COMM , KC_DOT  , KC_SLSH , KC_ENT  ,
-  DF(_GAME),KC_LCTL, KC_LALT, KC_LGUI, LSPACE , MBSPC   , MENTER , RSPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
+  KC_LSFT, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT ,
+  GAME   ,KC_LCTL, KC_LALT, KC_LGUI, LSPACE , MBSPC   , MENTER , RSPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
 ),
 
 /* Lower
@@ -120,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Reset| Debug|      |      |      |      |TermOf|TermOn|      |      |  Del |
+ * |Backli| Reset| Debug|      |      |      |      |TermOf|TermOn|      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -131,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_preonic_grid(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,
+  BACKLIT, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,
   _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______,  _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -148,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   D  |   V  |   K  |   H  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |COLMAK| Ctrl | Alt  | GUI  |LSPACE|MBSPC |MENTER|RSPACE| Left | Down |  Up  |Right |
+ * |COLMAK| Ctrl | Alt  | GUI  |LSPACE| Shift|Shift |RSPACE| Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_GAME] = LAYOUT_preonic_grid(
@@ -156,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB , KC_Q  , KC_W   , KC_F   ,  KC_P  ,    KC_B ,   KC_J , KC_L   , KC_U    ,    KC_Y , KC_SCLN , KC_DEL  ,
   KC_ESC , KC_A  , KC_R   , KC_S   ,  KC_T  ,    KC_G ,   KC_M , KC_N   , KC_E    , KC_I    , KC_O    , KC_QUOT ,
   KC_LSFT, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COMM , KC_DOT  , KC_SLSH , KC_ENT  ,
-  DF(_COLEMAK),KC_LCTL, KC_LALT, KC_LGUI, LSPACE , MBSPC   , MENTER , KC_SPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
+  COLEMAK,KC_LCTL, KC_LALT, KC_LGUI, LSPACE , KC_LSFT, KC_RSFT , KC_SPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
 )
 
 }; // keymap function end
@@ -166,9 +171,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case COLEMAK:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(colemak_sound);
+        #endif
+        default_layer_set(1U << _COLEMAK);
+      }
+      return false;
+    case GAME:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(game_sound);
+        #endif
+        default_layer_set(1U << _GAME);
+      }
+      return false;
     case BACKLIT:
       if (record->event.pressed) {
-        register_code(KC_RSFT);
+        #ifdef AUDIO_ENABLE
+
+          // PLAY_SONG(SONG(COLEMAK_SOUND));
+          //play_note(NOTE_C4, 1);
+        #endif
+        //register_code(KC_RSFT);
         #ifdef BACKLIGHT_ENABLE
           backlight_step();
         #endif
@@ -176,7 +202,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         writePinLow(E6);
         #endif
       } else {
-        unregister_code(KC_RSFT);
+
+        //unregister_code(KC_RSFT);
         #ifdef __AVR__
         writePinHigh(E6);
         #endif
@@ -186,4 +213,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 };
-

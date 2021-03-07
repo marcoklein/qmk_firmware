@@ -15,7 +15,7 @@
 // TODO change this to a "TAPPING_FORCE_HOLD_PER_KEY" option
 #define TAPPING_FORCE_HOLD
 
-/** Miscellaneous **/
+/** Audio **/
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)
