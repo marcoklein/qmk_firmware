@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
-#include "muse.h"
 
 #include "keymap.h"
 
@@ -9,26 +8,35 @@ float game_sound[][2] = SONG(GUITAR_SOUND);
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_COLEMAK] = LAYOUT_preonic_grid(
-  KC_GRV , KC_1  , KC_2   , KC_3   ,  KC_4  ,    KC_5 ,   KC_6 , KC_7   , KC_8    ,    KC_9 , KC_0    , KC_BSPC ,
-  KC_TAB , KC_Q  , KC_W   , KC_F   ,  KC_P  ,    KC_B ,   KC_J , KC_L   , KC_U    ,    KC_Y , KC_SCLN , KC_DEL  ,
-  KC_ESC , MOD_A , MOD_R  , MOD_S  ,  MOD_T ,    KC_G ,   KC_M , MOD_N  , MOD_E   , MOD_I   , MOD_O   , KC_QUOT ,
-CAPS_WORD, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COMM , KC_DOT  , KC_SLSH , XXXXXXX ,
-  COL_EXP,KC_LCTL, KC_LALT, KC_LGUI, LSPACE , MBSPC   , MENTER , RSPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
+  DE_GRV ,  DE_1  , DE_2   , DE_3   ,  DE_4  ,    DE_5,   DE_6 , DE_7   , DE_8   ,    DE_9, DE_0   , KC_BSPC,
+  KC_TAB ,  DE_Q  , DE_W   , DE_F   ,  DE_P  ,    DE_B,   DE_J , DE_L   , DE_U   ,    DE_Y, DE_SCLN, KC_DEL ,
+  KC_ESC ,  MOD_A , MOD_R  , MOD_S  ,  MOD_T ,    DE_G,   DE_M , MOD_N  , MOD_E  , MOD_I  , MOD_O  , DE_QUOT,
+CAPS_WORD,  DE_Z  , DE_X   , DE_C   ,  DE_D  ,    DE_V,   DE_K , DE_H   , DE_COMM, DE_DOT , DE_SLSH, XXXXXXX,
+  COL_EXP, XXXXXXX, XXXXXXX, XXXXXXX, LSPACE , MBSPC  , MENTER , RSPACE , KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT
 ),
 
+[_SHIFT] = LAYOUT_preonic_grid(
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, DE_COLN, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, DE_DQUO,
+  _______, _______, _______, _______, _______, _______, _______, _______, DE_LABK, DE_RABK, DE_QUES, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+// DE_*DIA = ae, oe, ue
 [_LOWER] = LAYOUT_preonic_grid(
-  KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-  KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL,
-  KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,  KC_PIPE,
-  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______,
-  _______, _______, _______, _______, ADJUST,  _______, _______, ADJUST, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+  DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_CIRC, DE_AMPR, DE_ASTR, DE_LPRN, DE_RPRN, KC_BSPC,
+  DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_CIRC, DE_AMPR, DE_ASTR, DE_LPRN, DE_RPRN, KC_DEL,
+  KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6  , DE_UNDS, DE_PLUS, DE_LCBR, DE_RCBR, DE_PIPE,
+  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12 , DE_ADIA, DE_ODIA, DE_UDIA, DE_SS  , _______,
+  _______, _______, _______, _______, ADJUST,  _______, _______, ADJUST , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 [_RAISE] = LAYOUT_preonic_grid(
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
-  KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,  KC_MINS, KC_EQL,   KC_LBRC, KC_RBRC, KC_BSLS,
-  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
+  DE_GRV,  DE_1,    DE_2,    DE_3,    DE_4,    DE_5,   DE_6  ,    DE_7,    DE_8,    DE_9,    DE_0,    KC_BSPC,
+  DE_GRV,  DE_1,    DE_2,    DE_3,    DE_4,    DE_5,   DE_6  ,    DE_7,    DE_8,    DE_9,    DE_0,    KC_DEL,
+  KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_F6 , DE_MINS, DE_EQL,   DE_LBRC, DE_RBRC, DE_BSLS,
+  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, KC_F12, _______, _______, KC_PGUP, KC_PGDN, _______,
   _______, _______, _______, _______, _______, ADJUST, ADJUST, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
@@ -41,10 +49,10 @@ CAPS_WORD, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COM
 ),
 
 [_COLEMAK_EXP] = LAYOUT_preonic_grid(
-  KC_GRV , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,   KC_6 , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
-  KC_TAB , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,   KC_J , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_DEL ,
-  KC_ESC , MOD_A  , MOD_R  , MOD_S  , MOD_T  , KC_G   ,   KC_M , MOD_N  , MOD_E  , MOD_I  , MOD_O  , KC_QUOT,
-  XXXXXXX, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   ,   KC_K , KC_H   , KC_COMM, KC_DOT , KC_SLSH, XXXXXXX,
+  DE_GRV , DE_1   , DE_2   , DE_3   , DE_4   , DE_5   ,   DE_6 , DE_7   , DE_8   , DE_9   , DE_0   , KC_BSPC,
+  KC_TAB , DE_Q   , DE_W   , DE_F   , DE_P   , DE_B   ,   DE_J , DE_L   , DE_U   , DE_Y   , DE_SCLN, KC_DEL ,
+  KC_ESC , MOD_A  , MOD_R  , MOD_S  , MOD_T  , DE_G   ,   DE_M , MOD_N  , MOD_E  , MOD_I  , MOD_O  , DE_QUOT,
+  XXXXXXX, DE_Z   , DE_X   , DE_C   , DE_D   , DE_V   ,   DE_K , DE_H   , DE_COMM, DE_DOT , DE_SLSH, XXXXXXX,
   GAME   , XXXXXXX, XXXXXXX, XXXXXXX, LSPACE , MBSPC  , MENTER , RSPACE , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
@@ -58,14 +66,39 @@ CAPS_WORD, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COM
 
 // no home row mods
 [_GAME] = LAYOUT_preonic_grid(
-  KC_GRV , KC_1  , KC_2   , KC_3   ,  KC_4  ,    KC_5 ,   KC_6 , KC_7   , KC_8    ,    KC_9 , KC_0    , KC_BSPC ,
-  KC_TAB , KC_Q  , KC_W   , KC_F   ,  KC_P  ,    KC_B ,   KC_J , KC_L   , KC_U    ,    KC_Y , KC_SCLN , KC_DEL  ,
-  KC_ESC , KC_A  , KC_R   , KC_S   ,  KC_T  ,    KC_G ,   KC_M , KC_N   , KC_E    , KC_I    , KC_O    , KC_QUOT ,
-  KC_LSFT, KC_Z  , KC_X   , KC_C   ,  KC_D  ,    KC_V ,   KC_K , KC_H   , KC_COMM , KC_DOT  , KC_SLSH , KC_ENT  ,
+  DE_GRV , DE_1  , DE_2   , DE_3   ,  DE_4  ,    DE_5 ,   DE_6 , DE_7   , DE_8    ,    DE_9 , DE_0    , KC_BSPC ,
+  KC_TAB , DE_Q  , DE_W   , DE_F   ,  DE_P  ,    DE_B ,   DE_J , DE_L   , DE_U    ,    DE_Y , DE_SCLN , KC_DEL  ,
+  KC_ESC , DE_A  , DE_R   , DE_S   ,  DE_T  ,    DE_G ,   DE_M , DE_N   , DE_E    , DE_I    , DE_O    , DE_QUOT ,
+  KC_LSFT, DE_Z  , DE_X   , DE_C   ,  DE_D  ,    DE_V ,   DE_K , DE_H   , DE_COMM , DE_DOT  , DE_SLSH , KC_ENT  ,
   COLEMAK,KC_LCTL, KC_LALT, KC_LGUI, LSPACE , KC_LSFT, KC_RSFT , KC_SPACE , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT
 )
 
 }; // keymap function end
+
+
+uint8_t mod_state;
+bool process_shift_layer(uint16_t keycode, const keyrecord_t *record) {
+  mod_state = get_mods();
+  if (keycode == DE_COMM) {
+    // FIXME initial call of this function still returns key of base layer
+    // solution might be to manually handle the home row shift mod
+    // or just remap the keys...
+    keycode = DE_LABK;
+  }
+  switch (keycode) {
+    // keycodes to send without shift
+    case DE_LABK:
+      if (record->event.pressed) {
+        del_mods(MOD_MASK_SHIFT);
+        register_code(keycode);
+        set_mods(mod_state);
+      } else {
+        unregister_code(keycode);
+      }
+      return false;
+  }
+  return true;
+}
 
 // detect interrupts of dual function layer keys
 bool layer_key_active = true;
@@ -80,6 +113,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   {
     layer_key_active = false;
   }
+
+  if (get_mods() & MOD_MASK_SHIFT) {
+    layer_on(_SHIFT);
+    if (!process_shift_layer(keycode, record)) {
+     return false;
+    }
+  } else {
+    layer_off(_SHIFT);
+  }
+
   switch (keycode) {
 
     /* layer codes */
@@ -159,6 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true; // process key by qmk
 };
 
+
 // Enables the capitalization of complete words
 
 void caps_word_enable(void) {
@@ -193,14 +237,19 @@ void process_caps_word(uint16_t keycode, const keyrecord_t *record) {
 
     switch (keycode) {
       // shifted keys
+      case DE_UDIA: // ue
+      case DE_ODIA: // oe
+      case DE_ADIA: // ae
       case KC_A ... KC_Z:
         if (record->event.pressed) {
           caps_word_enable();
         }
-      // keys that should not get shifted
-      case KC_MINS:
+      // ignore keys
       case KC_BSPC:
-      case KC_UNDS:
+      case DE_UNDS:
+        break;
+      // keys that should not get shifted
+      case DE_SS: // KC_MINS (ß)
       case CAPS_WORD:
         if (record->event.pressed && (get_mods() != MOD_LSFT) && (get_mods() != 0)) {
           // chording mods disables word caps
