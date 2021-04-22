@@ -159,7 +159,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_key_active = true;
         mods_on_layer_activation = get_mods();
         layer_on(_RAISE);
-      } else if (!record->event.pressed) {
+      } else {
         if (layer_key_active) {
           // send key only if no other key has been pressed while holding down this key
           tap_code(KC_SPACE);
@@ -173,7 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_key_active = true;
         mods_on_layer_activation = get_mods();
         layer_on(_LOWER);
-      } else if (!record->event.pressed) {
+      } else {
         if (layer_key_active)
           tap_code(KC_BSPACE);
         layer_off(_LOWER);
@@ -185,7 +185,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_key_active = true;
         mods_on_layer_activation = get_mods();
         layer_on(_LOWER);
-      } else if (!record->event.pressed) {
+      } else {
         if (layer_key_active)
           tap_code(KC_ENTER);
         layer_off(_LOWER);
