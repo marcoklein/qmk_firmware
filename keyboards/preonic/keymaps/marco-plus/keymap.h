@@ -7,20 +7,18 @@
 enum preonic_layers {
   _COLEMAK,
   _SHIFT,
+  _NAV,
   _LOWER,
   _RAISE,
   _ADJUST,
   _GAME,
-  _COLEMAK_EXP,
-  _NAV,
-  _NAV_RAISE
+  _COLEMAK_EXP
 };
 
 enum preonic_keycodes {
   GAME = SAFE_RANGE,
   COLEMAK,
   COL_EXP,
-  L_NAV_R,
   LSPACE,
   RSPACE,
   MBSPC,

@@ -12,9 +12,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB ,  DE_Q  , DE_W   , DE_F   ,  DE_P  ,    DE_B,   DE_J , DE_L   , DE_U   ,    DE_Y, DE_SCLN, KC_DEL ,
   KC_ESC ,  MOD_A , MOD_R  , MOD_S  ,  MOD_T ,    DE_G,   DE_M , MOD_N  , MOD_E  , MOD_I  , MOD_O  , DE_QUOT,
 CAPS_WORD,  DE_Z  , DE_X   , DE_C   ,  DE_D  ,    DE_V,   DE_K , DE_H   , DE_COMM, DE_DOT , DE_SLSH, XXXXXXX,
-  COL_EXP, XXXXXXX, XXXXXXX, XXXXXXX, LSPACE , MBSPC  , MENTER , RSPACE , KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT
+  COL_EXP, XXXXXXX, XXXXXXX,MO(_NAV), LSPACE , MBSPC  , MENTER , RSPACE ,MO(_NAV), XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
+// custom key codes on shift
 [_SHIFT] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, DE_COLN, _______,
@@ -23,7 +24,15 @@ CAPS_WORD,  DE_Z  , DE_X   , DE_C   ,  DE_D  ,    DE_V,   DE_K , DE_H   , DE_COM
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
-// DE_*DIA = ae, oe, ue
+[_NAV] = LAYOUT_preonic_grid(
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_UP  , KC_PGDN, _______, _______,
+  _______, KC_LWIN, KC_LALT, KC_LCTL, KC_LSFT, _______, KC_HOME, KC_LEFT, KC_DOWN,KC_RIGHT, KC_END , _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+// DE_(A|O|U)DIA = ae, oe, ue
 [_LOWER] = LAYOUT_preonic_grid(
   DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_CIRC, DE_AMPR, DE_ASTR, DE_LPRN, DE_RPRN, KC_BSPC,
   DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_CIRC, DE_AMPR, DE_ASTR, DE_LPRN, DE_RPRN, KC_DEL,
@@ -61,7 +70,7 @@ CAPS_WORD,  DE_Z  , DE_X   , DE_C   ,  DE_D  ,    DE_V,   DE_K , DE_H   , DE_COM
 //   _______, _______, _______, _______, _______, _______, _______, _______, KC_7   , KC_8   , KC_9   , _______, _______,
 //   _______, _______, _______, _______, _______, _______, _______, _______, KC_4   , KC_5   , KC_6   , _______, _______,
 //   _______, _______, _______, _______, _______, _______, _______, _______, KC_1   , KC_2   , KC_3   , _______, _______,
-//   _______, _______, _______, _______, L_NAV_R, _______, _______, _______, KC_0   , _______, _______, _______, _______,
+//   _______, _______, _______, _______, _______, _______, _______, _______, KC_0   , _______, _______, _______, _______,
 // ),
 
 // no home row mods
