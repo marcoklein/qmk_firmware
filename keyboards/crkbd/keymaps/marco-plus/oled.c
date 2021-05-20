@@ -15,6 +15,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 #define L_RAISE 4
 #define L_ADJUST 8
 
+char str[2] = {};
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
@@ -33,9 +34,12 @@ void oled_render_layer_state(void) {
         case L_ADJUST|L_LOWER|L_RAISE:
             oled_write_ln_P(PSTR("Adjust"), false);
             break;
+        default:
+            snprintf(str, sizeof(str), "%lu", layer_state);
+            oled_write(str, false);
+            break;
     }
 }
-
 
 char keylog_str[24] = {};
 

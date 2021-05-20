@@ -13,7 +13,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
     CAPS_WORD,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX,  LSPACE,   MBSPC,     MENTER,  RSPACE, XXXXXXX
+                                         MO(_NAV),  LSPACE,   MBSPC,     MENTER,  RSPACE, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -21,11 +21,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_TILD, KC_BSLS, KC_MINS,  KC_EQL, _______,                      KC_LBRC, KC_RBRC, _______, _______, _______, _______,
+      _______,GUI_TILD,ALT_BSLS,CTL_MINS, SFT_EQL, _______,                      _______,SFT_LBRC,CTL_RBRC, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX,  ADJUST, _______,    _______,  ADJUST, XXXXXXX
+                                          _______,  ADJUST, _______,    _______,  ADJUST, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -37,7 +37,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, _______,  ADJUST,    ADJUST,  _______, XXXXXXX
+                                          _______, _______,  ADJUST,    ADJUST,  _______, XXXXXXX
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+  [_NAV] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, _______, _______,                      _______, KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, _______, _______,                      _______, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, _______,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          _______, _______,  ADJUST,    ADJUST,  _______, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -74,30 +86,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
     /* layer codes */
-    case COLEMAK:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(colemak_sound);
-        #endif
-        default_layer_set(1U << _COLEMAK);
-      }
-      return false;
-    case COL_EXP:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(game_sound);
-        #endif
-        default_layer_set(1U << _COLEMAK_EXP);
-      }
-      return false;
-    case GAME:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(game_sound);
-        #endif
-        default_layer_set(1U << _GAME);
-      }
-      return false;
+    // case COLEMAK:
+    //   if (record->event.pressed) {
+    //     #ifdef AUDIO_ENABLE
+    //       PLAY_SONG(colemak_sound);
+    //     #endif
+    //     default_layer_set(1U << _COLEMAK);
+    //   }
+    //   return false;
+    // case COL_EXP:
+    //   if (record->event.pressed) {
+    //     #ifdef AUDIO_ENABLE
+    //       PLAY_SONG(game_sound);
+    //     #endif
+    //     default_layer_set(1U << _COLEMAK_EXP);
+    //   }
+    //   return false;
+    // case GAME:
+    //   if (record->event.pressed) {
+    //     #ifdef AUDIO_ENABLE
+    //       PLAY_SONG(game_sound);
+    //     #endif
+    //     default_layer_set(1U << _GAME);
+    //   }
+    //   return false;
 
     /* custom key codes */
 
@@ -105,43 +117,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RSPACE:
       if (record->event.pressed) {
         layer_key_active = true;
-        layer_on(_RAISE);
+        layer_on(_LOWER);
       } else {
         if (layer_key_active) {
           // send key only if no other key has been pressed while holding down this key
           tap_code(KC_SPACE);
         }
-        layer_off(_RAISE);
+        layer_off(_LOWER);
       }
       return false;
 
     case MBSPC:
       if (record->event.pressed) {
         layer_key_active = true;
-        layer_on(_LOWER);
+        layer_on(_RAISE);
       } else {
         if (layer_key_active)
           tap_code(KC_BSPACE);
-        layer_off(_LOWER);
+        layer_off(_RAISE);
       }
       return false;
 
     case MENTER:
       if (record->event.pressed) {
         layer_key_active = true;
-        layer_on(_LOWER);
+        layer_on(_RAISE);
       } else {
         if (layer_key_active)
           tap_code(KC_ENTER);
-        layer_off(_LOWER);
+        layer_off(_RAISE);
       }
       return false;
 
-    // case CAPS_WORD:
-    //   if (record->event.pressed) {
-    //     caps_word_enable();
-    //   }
-    //   return false;
+    case CAPS_WORD:
+      if (record->event.pressed) {
+        caps_word_enable();
+      }
+      return false;
 
   }
   return true; // process key by qmk

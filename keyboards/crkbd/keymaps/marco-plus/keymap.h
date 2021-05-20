@@ -6,13 +6,10 @@
 
 enum corne_layers {
   _COLEMAK,
-  _SHIFT,
-  _NAV,
   _LOWER,
   _RAISE,
-  _ADJUST,
-  _GAME,
-  _COLEMAK_EXP
+  _NAV,
+  _ADJUST
 };
 
 enum corne_keycodes {
@@ -49,4 +46,4 @@ enum corne_keycodes {
 #define SFT_EQL LSFT_T(KC_EQL)
 
 #define SFT_LBRC RSFT_T(KC_LBRC)
-#define CTL_RBRC RCTL_T(KC_RBCR)
+#define CTL_RBRC RCTL_T(KC_RBRC)
