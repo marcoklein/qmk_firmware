@@ -31,4 +31,8 @@
     #define RGBLIGHT_VAL_STEP 17
 #endif
 
+
+#define BOOTMAGIC_KEY_SALT KC_TAB
+#define BOOTMAGIC_KEY_EEPROM_CLEAR KC_C
+
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
