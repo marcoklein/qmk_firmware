@@ -21,9 +21,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,GUI_TILD,ALT_BSLS,CTL_MINS, SFT_EQL, _______,                      _______,SFT_LBRC,CTL_RBRC, _______, _______, _______,
+      _______,GUI_TILD,ALT_BSLS,CTL_MINS, SFT_EQL, _______,                      _______,SFT_LBRC,CTL_RBRC, _______,GUI_QUOT, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      _______, _______, _______, _______, _______, _______,                      _______,   UC_AE,   UC_OE,   UC_UE,   UC_SS, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  ADJUST,    ADJUST,  _______, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -31,11 +31,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+      _______,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+      _______,  GUI_F1,ALT_CAPS, CTL_ESC, SFT_TAB, _______,                      _______, _______, _______, _______, GUI_F12, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+      _______, _______, _______,  KC_INS, KC_PSCR, _______,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______,  ADJUST, _______,    _______,  ADJUST, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -57,11 +57,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI,  UC_MOD, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -84,42 +84,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-
-    case LSPACE:
-    case RSPACE:
-      if (record->event.pressed) {
-        layer_key_active = true;
-        layer_on(_LOWER);
-      } else {
-        if (layer_key_active) {
-          // send key only if no other key has been pressed while holding down this key
-          tap_code(KC_SPACE);
-        }
-        layer_off(_LOWER);
-      }
-      return false;
-
-    case MBSPC:
-      if (record->event.pressed) {
-        layer_key_active = true;
-        layer_on(_RAISE);
-      } else {
-        if (layer_key_active)
-          tap_code(KC_BSPACE);
-        layer_off(_RAISE);
-      }
-      return false;
-
-    case MENTER:
-      if (record->event.pressed) {
-        layer_key_active = true;
-        layer_on(_RAISE);
-      } else {
-        if (layer_key_active)
-          tap_code(KC_ENTER);
-        layer_off(_RAISE);
-      }
-      return false;
 
     case CAPS_WORD:
       if (record->event.pressed) {

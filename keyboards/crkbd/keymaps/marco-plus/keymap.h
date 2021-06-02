@@ -16,14 +16,23 @@ enum corne_keycodes {
   GAME = SAFE_RANGE,
   COLEMAK,
   COL_EXP,
-  LSPACE,
-  RSPACE,
-  MBSPC,
-  MENTER,
   CAPS_WORD
 };
 
+// layers
+
 #define ADJUST MO(_ADJUST)
+#define LSPACE LT(_LOWER, KC_SPACE)
+#define RSPACE LT(_LOWER, KC_SPACE)
+#define MBSPC LT(_RAISE, KC_BSPC)
+#define MENTER LT(_RAISE, KC_ENTER)
+
+// umlauts
+
+#define UC_AE UC(0x00E4)// uppercase, 0x00C4)
+#define UC_OE UC(0x00F6)// uppercase, 0x00D6)
+#define UC_UE UC(0x00FC)// uppercase, 0x00DC)
+#define UC_SS UC(0x00DF)
 
 // home row mods
 
@@ -47,3 +56,13 @@ enum corne_keycodes {
 
 #define SFT_LBRC RSFT_T(KC_LBRC)
 #define CTL_RBRC RCTL_T(KC_RBRC)
+// #define ALT
+#define GUI_QUOT RGUI_T(KC_QUOT)
+
+// _RAISE
+#define GUI_F1 LGUI_T(KC_F1)
+#define ALT_CAPS LALT_T(CAPS_WORD)
+#define CTL_ESC LCTL_T(KC_ESC)
+#define SFT_TAB LSFT_T(KC_TAB)
+
+#define GUI_F12 RGUI_T(KC_F12)

@@ -36,3 +36,5 @@
 #define BOOTMAGIC_KEY_EEPROM_CLEAR KC_C
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+
+#define UNICODE_SELECTED_MODES UC_WINC, UC_MAC, UC_LNX

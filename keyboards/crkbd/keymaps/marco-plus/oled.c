@@ -36,7 +36,7 @@ void oled_render_layer_state(void) {
             break;
         default:
             snprintf(str, sizeof(str), "%lu", layer_state);
-            oled_write(str, false);
+            oled_write_ln(str, false);
             break;
     }
 }
@@ -66,7 +66,7 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
 }
 
 void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
+    oled_write_ln(keylog_str, false);
 }
 
 void render_bootmagic_status(bool status) {
@@ -93,19 +93,43 @@ void oled_render_logo(void) {
     oled_write_P(crkbd_logo, false);
 }
 
+char unicode_str[5] = {};
+void oled_render_unicode_os(void) {
+    #ifdef UNICODE_ENABLE
+    oled_write_P(PSTR("OS: "), false);
+    const uint8_t unicode_input_mode = get_unicode_input_mode();
+    switch (unicode_input_mode) {
+        case UC_WINC:
+            oled_write_ln_P(PSTR("Windows"), false);
+            break;
+        case UC_LNX:
+            oled_write_ln_P(PSTR("Linux"), false);
+            break;
+        case UC_MAC:
+            oled_write_ln_P(PSTR("Mac"), false);
+            break;
+        default:
+            snprintf(unicode_str, sizeof(unicode_str), "%iu", unicode_input_mode);
+            oled_write_ln(unicode_str, false);
+            break;
+    }
+    #endif
+}
+
 void oled_task_user(void) {
     if (is_master) {
         oled_render_layer_state();
         oled_render_keylog();
+        oled_render_unicode_os();
     } else {
         oled_render_logo();
     }
 }
 
 bool oled_process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
-  }
-  return true;
+    if (record->event.pressed) {
+        set_keylog(keycode, record);
+    }
+    return true;
 }
 #endif // OLED_DRIVER_ENABLE
