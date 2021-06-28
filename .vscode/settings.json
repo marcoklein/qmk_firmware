@@ -17,11 +17,26 @@
         "xstddef": "c",
         "type_traits": "c",
         "utility": "c",
-        "ranges": "c"
+        "ranges": "c",
+        "xutility": "c",
+        "chrono": "c",
+        "ctime": "c",
+        "iomanip": "c",
+        "thread": "c",
+        "xhash": "c",
+        "xlocale": "c",
+        "xlocinfo": "c",
+        "xloctime": "c",
+        "xtree": "c"
     },
     "[markdown]": {
         "editor.trimAutoWhitespace": false,
         "files.trimTrailingWhitespace": false
     },
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "C_Cpp.dimInactiveRegions": false,
+    "python.formatting.provider": "yapf",
+    "[json]": {
+	    "editor.formatOnSave": false
+    }
 }
