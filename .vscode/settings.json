@@ -34,5 +34,9 @@
         "files.trimTrailingWhitespace": false
     },
     "editor.formatOnSave": false,
-    "C_Cpp.dimInactiveRegions": false
+    "C_Cpp.dimInactiveRegions": false,
+    "python.formatting.provider": "yapf",
+    "[json]": {
+	    "editor.formatOnSave": false
+    }
 }
