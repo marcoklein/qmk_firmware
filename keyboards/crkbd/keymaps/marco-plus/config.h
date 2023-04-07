@@ -1,6 +1,7 @@
 #pragma once
 
-#define MASTER_LEFT
+
+// #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
@@ -21,6 +22,16 @@
 // you may change this to a "TAPPING_FORCE_HOLD_PER_KEY" option
 #define TAPPING_FORCE_HOLD
 
+#ifndef __ASSEMBLER__
+    enum corne_layers {
+        _COLEMAK,
+        _LOWER,
+        _RAISE,
+        _NAV,
+        _ADJUST
+    };
+#endif
+
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
     #define RGBLIGHT_ANIMATIONS
@@ -37,4 +48,4 @@
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 
-#define UNICODE_SELECTED_MODES UC_WINC, UC_MAC, UC_LNX
+// #define UNICODE_SELECTED_MODES UC_WINC, UC_MAC, UC_LNX

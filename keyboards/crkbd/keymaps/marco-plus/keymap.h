@@ -2,22 +2,7 @@
 
 #include QMK_KEYBOARD_H
 
-#include "caps_word.h"
-
-enum corne_layers {
-  _COLEMAK,
-  _LOWER,
-  _RAISE,
-  _NAV,
-  _ADJUST
-};
-
-enum corne_keycodes {
-  GAME = SAFE_RANGE,
-  COLEMAK,
-  COL_EXP,
-  CAPS_WORD
-};
+// #include "caps_word.h"
 
 // layers
 
@@ -40,8 +25,7 @@ enum corne_keycodes {
 #define GUI_A LGUI_T(KC_A)
 #define ALT_R LALT_T(KC_R)
 #define CTL_S LCTL_T(KC_S)
-#undef SFT_T
-#define SFT_T LSFT_T(KC_T)
+#define SHFT_T LSFT_T(KC_T)
 
 #define SFT_N RSFT_T(KC_N)
 #define CTL_E RCTL_T(KC_E)

@@ -1,5 +1,12 @@
 #include "caps_word.h"
 
+// enum corne_keycodes {
+//     GAME = SAFE_RANGE,
+//     COLEMAK,
+//     COL_EXP,
+//     CAPS_WORD
+// };
+
 void caps_word_enable(void) {
   caps_word_on = true;
   if (!(host_keyboard_led_state().caps_lock)) {
