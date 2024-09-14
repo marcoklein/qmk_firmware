@@ -12,6 +12,26 @@ util/docker_build.sh preonic/rev3:marco-plus
 
 Run [QMK Toolbox](https://github.com/qmk/qmk_toolbox) to flash onto your keyboard.
 
+---
+
+Install on MacOS:
+
+```sh
+brew install qmk/qmk/qmk
+```
+
+Compilation
+
+```sh
+qmk compile -kb preonic/rev3 -km marco-plus
+```
+
+Flash
+
+```sh
+qmk flash -kb preonic/rev3 -km marco-plus
+```
+
 # Features
 
 ## Ergonomic Design
